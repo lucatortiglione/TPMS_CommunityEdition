@@ -6,16 +6,24 @@ local anchors = {
     standard = { point = "stop", dx = 2, dy = -23, x = 233, y = 116 },
     heavy = { point = "stop", dx = 32, dy = 0, x = 201, y = 137 },
     sport = { point = "door", dx = -26, dy = 0, x = 385, y = 162 },
+    -- Luxury shares the sport dashboard: use the free slot immediately left of
+    -- its lower-left warning strip, without covering the STOP lamp.
+    luxury = { point = "stop", dx = -26, dy = 0, x = 94, y = 162 },
 }
 
 local function round(value)
     return floor(value + 0.5)
 end
 
--- getTexture can hand back an empty placeholder or nil on failure.
+-- PZ textures are Java userdata, not Lua tables. Validate the dimensions via
+-- their methods, also rejecting nil/empty placeholders returned on load failure.
 local function usableTexture(texture)
-    return type(texture) == "table" and type(texture.getWidthOrig) == "function"
-        and texture:getWidthOrig() > 0 and texture:getHeightOrig() > 0
+    if not texture then return false end
+    local ok, width, height = pcall(function()
+        return texture:getWidthOrig(), texture:getHeightOrig()
+    end)
+    return ok and type(width) == "number" and type(height) == "number"
+        and width > 0 and height > 0
 end
 
 local function resolveAnchor(dashboard, family, scale)
@@ -47,23 +55,32 @@ function Layout.update(dashboard, state)
     local realistic = dashboard.__YourDashPatched == true
         or (yd ~= nil and yd.MODOPT_ID == "RealisticDash" and dashboard.__YourDashFamily ~= nil)
     local family = realistic and (dashboard.__YourDashFamily or "standard") or "vanilla"
+    local anchorFamily = family
+    if family == "sport" and (dashboard.__YourDashAccent == "lux"
+        or (dashboard.__YourDashAccent == nil and dashboard.vehicle
+            and dashboard.vehicle:getScriptName() == "Base.CarLuxury")) then
+        anchorFamily = "luxury"
+    end
     local scale = realistic and yd and yd.GetScale and yd.GetScale() or 1
     if type(scale) ~= "number" or scale ~= scale or scale <= 0 or scale == math.huge then scale = 1 end
     local bx, by = background:getX(), background:getY()
     local bw, bh = background:getWidth(), background:getHeight()
     if not state.layoutDirty and state.family == family and state.scale == scale
+        and state.anchorFamily == anchorFamily
         and state.bx == bx and state.by == by and state.bw == bw and state.bh == bh
         and state.background == background then return true end
 
     local x, y = 205, 56
     if realistic then
-        x, y = resolveAnchor(dashboard, family, scale)
+        x, y = resolveAnchor(dashboard, anchorFamily, scale)
     end
     local light = state.light
     local texture = realistic and state.textures.realistic or state.textures.icon
+    if not usableTexture(state.textures.icon) then return false end
     if not usableTexture(texture) then texture = state.textures.icon end
-    if not usableTexture(texture) then return false end
-    light.texture = texture
+    -- Keep the existing RD sprite's dimensions/anchors, but tint the neutral
+    -- icon: the pre-coloured amber sprite cannot produce a true yellow/red.
+    light.texture = state.textures.icon
     local width, height = round(texture:getWidthOrig() * scale), round(texture:getHeightOrig() * scale)
     x = math.max(0, math.min(x, bw - width))
     y = math.max(0, math.min(y, bh - height))
@@ -77,6 +94,7 @@ function Layout.update(dashboard, state)
         state.panel:setY(by + y - 4)
     end
     state.realistic, state.family, state.scale = realistic, family, scale
+    state.anchorFamily = anchorFamily
     state.bx, state.by, state.bw, state.bh = bx, by, bw, bh
     state.background, state.layoutDirty = background, false
     return true

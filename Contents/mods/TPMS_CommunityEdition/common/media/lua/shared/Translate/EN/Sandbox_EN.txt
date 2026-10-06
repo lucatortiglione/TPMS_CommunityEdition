@@ -2,10 +2,10 @@ Sandbox_EN = {
     Sandbox_LTPMS = "Community TPMS",
 
     Sandbox_LTPMS_ThresholdOne = "Low-pressure threshold",
-    Sandbox_LTPMS_ThresholdOne_tooltip = "Remaining pressure relative to the tire's nominal pressure in the game. Above this value the light is off. At or below it, but above the critical threshold, the light stays amber.<br>Default: 0.75 = 75% remaining pressure (25% loss). Existing worlds keep their saved value.",
+    Sandbox_LTPMS_ThresholdOne_tooltip = "Remaining pressure relative to the tire's nominal pressure in the game. Above this value the light is off. At or below it, but above the critical threshold, the light stays yellow.<br>Default: 0.75 = 75% remaining pressure (25% loss). Existing worlds keep their saved value.",
 
     Sandbox_LTPMS_ThresholdTwo = "Critical-pressure threshold",
-    Sandbox_LTPMS_ThresholdTwo_tooltip = "At or below this value the light flashes amber until pressure recovers.<br>Default: 0.50 = 50% remaining pressure. Cannot exceed the low-pressure threshold.<br>A removed or destroyed tire, or invalid tire data, makes the light flash red until the fault is resolved.",
+    Sandbox_LTPMS_ThresholdTwo_tooltip = "At or below this value the light flashes amber until pressure recovers.<br>Default: 0.50 = 50% remaining pressure. Cannot exceed the low-pressure threshold.<br>A removed or destroyed tire, or a failed/invalid tire reading, makes the light stay red until the fault is resolved.",
 
     Sandbox_LTPMS_Ubiquity = "Ubiquity",
     Sandbox_LTPMS_Ubiquity_tooltip = "What vehicles TPMS sensors will be present on.",

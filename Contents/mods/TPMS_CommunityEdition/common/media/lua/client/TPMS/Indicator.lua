@@ -7,9 +7,9 @@ local SAMPLE_MS = 1000
 local BLINK_MS = 250
 local colors = {
     off = { r = 1, g = 1, b = 1, a = 0.4 },
-    on = { r = 0.8, g = 0.62, b = 0, a = 1 },
-    error = { r = 1, g = 0, b = 0, a = 0.6 },
-    realistic = { r = 1, g = 1, b = 1, a = 1 },
+    on = { r = 1, g = 1, b = 0, a = 1 },
+    warn = { r = 1, g = 0.62, b = 0, a = 1 },
+    error = { r = 1, g = 0, b = 0, a = 1 },
 }
 local textures
 
@@ -147,7 +147,7 @@ local function sampleState(state, vehicle, powered, now, forceRead)
         -- Keep the blink phase while editing options if the status stays
         -- unchanged. A different warning state starts a fresh blink cycle.
         if state.status ~= status then
-            state.blinkStart = (status == "warn" or status == "error") and now or nil
+            state.blinkStart = status == "warn" and now or nil
         end
         state.status, state.light.state = status, status
         state.light.mouseovertext = tooltip(status, settings)
@@ -158,15 +158,15 @@ end
 local function render(state, now, powered)
     local status = powered and state.status or "off"
     local lit = status ~= "off"
-    if status == "warn" or status == "error" then
+    if status == "warn" then
         lit = math.floor((now - (state.blinkStart or now)) / BLINK_MS) % 2 == 0
     end
     if state.realistic then
-        state.light.backgroundColor = status == "error" and colors.error or colors.realistic
+        state.light.backgroundColor = colors[status]
         setVisible(state.panel, false)
         setVisible(state.light, lit)
     else
-        state.light.backgroundColor = lit and (status == "error" and colors.error or colors.on) or colors.off
+        state.light.backgroundColor = lit and colors[status] or colors.off
         setVisible(state.panel, true)
         setVisible(state.light, true)
     end

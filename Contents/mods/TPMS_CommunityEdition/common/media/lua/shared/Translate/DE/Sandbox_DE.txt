@@ -5,7 +5,7 @@ Sandbox_DE = {
     Sandbox_LTPMS_ThresholdOne_tooltip = "Verbleibender Druck relativ zum Nenndruck des Reifens im Spiel. Oberhalb dieses Werts ist die Leuchte aus. Bei diesem Wert oder darunter, aber oberhalb der kritischen Schwelle, leuchtet sie dauerhaft gelb.<br>Standard: 0.75 = 75% Restdruck (25% Druckverlust). Bestehende Spielwelten behalten ihren gespeicherten Wert.",
 
     Sandbox_LTPMS_ThresholdTwo = "Kritische Reifendruckschwelle",
-    Sandbox_LTPMS_ThresholdTwo_tooltip = "Bei diesem Wert oder darunter blinkt die Leuchte gelb, bis der Druck wieder steigt.<br>Standard: 0.50 = 50% Restdruck. Kann die Schwelle fuer niedrigen Reifendruck nicht ueberschreiten.<br>Ein fehlender oder zerstoerter Reifen oder ungueltige Reifendaten lassen die Leuchte rot blinken, bis der Fehler behoben ist.",
+    Sandbox_LTPMS_ThresholdTwo_tooltip = "Bei diesem Wert oder darunter blinkt die Leuchte bernsteinfarben, bis der Druck wieder steigt.<br>Standard: 0.50 = 50% Restdruck. Kann die Schwelle fuer niedrigen Reifendruck nicht ueberschreiten.<br>Ein fehlender oder zerstoerter Reifen oder eine fehlgeschlagene/ungueltige Messung lassen die Leuchte dauerhaft rot leuchten, bis der Fehler behoben ist.",
 
     Sandbox_LTPMS_Ubiquity = "Allgegenwart",
     Sandbox_LTPMS_Ubiquity_tooltip = "Autos die mit TPMS ausgestattet sind.",

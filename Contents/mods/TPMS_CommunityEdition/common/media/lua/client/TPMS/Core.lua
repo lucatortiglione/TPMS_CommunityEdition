@@ -52,7 +52,7 @@ function Core.getSettings()
         return cachedSettings
     end
 
-    -- Ratios use PZ's nominal tire capacity as the reference: steady amber at
+    -- Ratios use PZ's nominal tire capacity as the reference: steady yellow at
     -- 75% remaining pressure, flashing amber at 50%, with faults taking priority.
     local alert = threshold(rawAlert, 0.75)
     local warning = math.min(alert, threshold(rawWarning, 0.5))
@@ -114,17 +114,20 @@ function Core.collectTires(vehicle)
     return tires
 end
 
+local function readTire(part)
+    if not part:getInventoryItem() then return nil end
+    return part:getCondition(), part:getContainerCapacity(), part:getContainerContentAmount()
+end
+
 function Core.sample(tires, settings)
     if not tires or #tires == 0 then return "off", nil end
     settings = settings or Core.getSettings()
     local minimum = math.huge
     for i = 1, #tires do
-        local part = tires[i]
-        if not part:getInventoryItem() then return "error", nil end
-        local condition = part:getCondition()
-        local capacity = part:getContainerCapacity()
-        local pressure = part:getContainerContentAmount()
-        if not isFinite(condition) or condition <= 0
+        -- A failed/missing sensor read is a fault, not an exception that leaves
+        -- the previous (possibly healthy) light state on screen.
+        local ok, condition, capacity, pressure = pcall(readTire, tires[i])
+        if not ok or not isFinite(condition) or condition <= 0
             or not isFinite(capacity) or capacity <= 0
             or not isFinite(pressure) or pressure < 0 then
             return "error", nil
