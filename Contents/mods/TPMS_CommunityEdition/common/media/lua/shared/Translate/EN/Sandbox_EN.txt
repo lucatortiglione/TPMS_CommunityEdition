@@ -1,0 +1,18 @@
+Sandbox_EN = {
+    Sandbox_LTPMS = "Community TPMS",
+
+    Sandbox_LTPMS_ThresholdOne = "Low-pressure threshold",
+    Sandbox_LTPMS_ThresholdOne_tooltip = "Remaining pressure relative to the tire's nominal pressure in the game. Above this value the light is off. At or below it, but above the critical threshold, the light stays amber.<br>Default: 0.75 = 75% remaining pressure (25% loss). Existing worlds keep their saved value.",
+
+    Sandbox_LTPMS_ThresholdTwo = "Critical-pressure threshold",
+    Sandbox_LTPMS_ThresholdTwo_tooltip = "At or below this value the light flashes amber until pressure recovers.<br>Default: 0.50 = 50% remaining pressure. Cannot exceed the low-pressure threshold.<br>A removed or destroyed tire, or invalid tire data, makes the light flash red until the fault is resolved.",
+
+    Sandbox_LTPMS_Ubiquity = "Ubiquity",
+    Sandbox_LTPMS_Ubiquity_tooltip = "What vehicles TPMS sensors will be present on.",
+    Sandbox_LTPMS_Ubiquity_option1 = "All of them",
+    Sandbox_LTPMS_Ubiquity_option2 = "Luxury",
+    Sandbox_LTPMS_Ubiquity_option3 = "Custom",
+
+    Sandbox_LTPMS_Whitelist = "Whitelist",
+    Sandbox_LTPMS_Whitelist_tooltip = "A string of semicolon-separated vehicles to allow TPMS to exist in.<br>Only used if Ubiquity is set to Custom.<br>For example:<br>Base.CarLuxury;Base.ModernCar;Base.ModernCar02;Base.ModernCar_Martin;",
+}

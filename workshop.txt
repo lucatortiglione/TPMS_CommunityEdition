@@ -1,0 +1,6 @@
+version=1
+id=3813853447
+title=[B42.21]TPMS Mod Community Edition
+description=A tire pressure monitoring system (TPMS) for vehicles bug fixed
+tags=Build 42;Realistic;Vehicles;WIP
+visibility=public

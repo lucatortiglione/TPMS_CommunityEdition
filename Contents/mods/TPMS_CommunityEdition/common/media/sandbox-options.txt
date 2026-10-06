@@ -1,0 +1,17 @@
+VERSION = 1,
+option LTPMS.ThresholdOne {
+    page = LTPMS, translation = LTPMS_ThresholdOne, valueTranslation = LTPMS_ThresholdOne,
+    type = double, min = 0, max = 1, default = 0.75,
+}
+option LTPMS.ThresholdTwo {
+    page = LTPMS, translation = LTPMS_ThresholdTwo, valueTranslation = LTPMS_ThresholdTwo,
+    type = double, min = 0, max = 1, default = 0.5,
+}
+option LTPMS.Ubiquity {
+    page = LTPMS, translation = LTPMS_Ubiquity, valueTranslation = LTPMS_Ubiquity,
+    type = enum, numValues = 3, default = 1,
+}
+option LTPMS.Whitelist {
+    page = LTPMS, translation = LTPMS_Whitelist, valueTranslation = LTPMS_Whitelist,
+    type = string, default = ,
+}

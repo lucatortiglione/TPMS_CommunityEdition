@@ -1,0 +1,5 @@
+Tooltip_DE = {
+    Tooltip_LTPMS_TPMS = "TPMS",
+    Tooltip_LTPMS_Malfunction = "TPMS-STOERUNG",
+    Tooltip_LTPMS_Pressure = "TPMS: Reifendruck bei oder unter %1%",
+}

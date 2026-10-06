@@ -1,0 +1,18 @@
+Sandbox_IT = {
+    Sandbox_LTPMS = "Community TPMS",
+
+    Sandbox_LTPMS_ThresholdOne = "Soglia di pressione bassa",
+    Sandbox_LTPMS_ThresholdOne_tooltip = "Pressione residua rispetto alla pressione nominale dello pneumatico nel gioco. Sopra questo valore la spia resta spenta. A questo valore o sotto, ma sopra la soglia critica, resta ambra fissa.<br>Predefinito: 0.75 = 75% di pressione residua (perdita del 25%). I mondi esistenti mantengono il valore salvato.",
+
+    Sandbox_LTPMS_ThresholdTwo = "Soglia di pressione critica",
+    Sandbox_LTPMS_ThresholdTwo_tooltip = "A questo valore o sotto la spia lampeggia ambra finche la pressione non risale.<br>Predefinito: 0.50 = 50% di pressione residua. Non puo superare la soglia di pressione bassa.<br>Uno pneumatico rimosso o distrutto, oppure dati non validi, fanno lampeggiare la spia rossa finche il guasto non viene risolto.",
+
+    Sandbox_LTPMS_Ubiquity = "Veicoli con TPMS",
+    Sandbox_LTPMS_Ubiquity_tooltip = "Quali veicoli sono dotati del sistema TPMS.",
+    Sandbox_LTPMS_Ubiquity_option1 = "Tutti",
+    Sandbox_LTPMS_Ubiquity_option2 = "Modelli di fascia alta",
+    Sandbox_LTPMS_Ubiquity_option3 = "Elenco personalizzato",
+
+    Sandbox_LTPMS_Whitelist = "Elenco dei veicoli abilitati",
+    Sandbox_LTPMS_Whitelist_tooltip = "Nomi completi degli script dei veicoli, separati da punto e virgola. Usato solo con Elenco personalizzato.<br>Esempio: Base.CarLuxury;Base.ModernCar;Base.ModernCar02;Base.ModernCar_Martin;",
+}

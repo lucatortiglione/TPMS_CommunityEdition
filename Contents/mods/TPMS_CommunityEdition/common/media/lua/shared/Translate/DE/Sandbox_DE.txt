@@ -1,0 +1,18 @@
+Sandbox_DE = {
+    Sandbox_LTPMS = "Lawly's TPMS",
+
+    Sandbox_LTPMS_ThresholdOne = "Schwelle fuer niedrigen Reifendruck",
+    Sandbox_LTPMS_ThresholdOne_tooltip = "Verbleibender Druck relativ zum Nenndruck des Reifens im Spiel. Oberhalb dieses Werts ist die Leuchte aus. Bei diesem Wert oder darunter, aber oberhalb der kritischen Schwelle, leuchtet sie dauerhaft gelb.<br>Standard: 0.75 = 75% Restdruck (25% Druckverlust). Bestehende Spielwelten behalten ihren gespeicherten Wert.",
+
+    Sandbox_LTPMS_ThresholdTwo = "Kritische Reifendruckschwelle",
+    Sandbox_LTPMS_ThresholdTwo_tooltip = "Bei diesem Wert oder darunter blinkt die Leuchte gelb, bis der Druck wieder steigt.<br>Standard: 0.50 = 50% Restdruck. Kann die Schwelle fuer niedrigen Reifendruck nicht ueberschreiten.<br>Ein fehlender oder zerstoerter Reifen oder ungueltige Reifendaten lassen die Leuchte rot blinken, bis der Fehler behoben ist.",
+
+    Sandbox_LTPMS_Ubiquity = "Allgegenwart",
+    Sandbox_LTPMS_Ubiquity_tooltip = "Autos die mit TPMS ausgestattet sind.",
+    Sandbox_LTPMS_Ubiquity_option1 = "Jeder von ihnen",
+    Sandbox_LTPMS_Ubiquity_option2 = "Luxuswagen",
+    Sandbox_LTPMS_Ubiquity_option3 = "Brauch",
+
+    Sandbox_LTPMS_Whitelist = "Zulassungsliste",
+    Sandbox_LTPMS_Whitelist_tooltip = "Zeichenfolge Mit Semikolon getrennt für autos mit TPMS.<br>Gebraucht nur wenn Allgegenwart ist auf brauch.<br>Zum beispiel:<br>Base.CarLuxury;Base.ModernCar;Base.ModernCar02;Base.ModernCar_Martin;",
+}

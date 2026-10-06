@@ -1,0 +1,9 @@
+name=[B42.21]TPMS Mod Community Edition
+id=TPMS_Community_Edition
+description=A tire pressure monitoring system (TPMS) with bug fixes for vanilla and Realistic Dashboard standard, heavy and sport dashboards.
+author=Squarty
+poster=poster.png
+icon=icon.png
+incompatible=LAWLYPOPS_TPMSINDICATOR
+tags=Build 42;Realistic;Vehicles;WIP
+versionMin=42.21
