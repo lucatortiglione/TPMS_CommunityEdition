@@ -159,15 +159,16 @@ end
 local function render(state, now, powered)
     local status = powered and state.status or "off"
     local lit = status ~= "off"
-    if status == "warn" or status == "error" then
+    if status == "warn" then
         lit = math.floor((now - (state.blinkStart or now)) / BLINK_MS) % 2 == 0
     end
     if state.realistic then
-        state.light.backgroundColor = status == "error" and colors.error or colors.realistic
+        -- The selected PNG already contains the required yellow/red color.
+        state.light.backgroundColor = colors.realistic
         setVisible(state.panel, false)
         setVisible(state.light, lit)
     else
-        state.light.backgroundColor = lit and (status == "error" and colors.error or colors.on) or colors.off
+        state.light.backgroundColor = lit and colors.realistic or colors.off
         setVisible(state.panel, true)
         setVisible(state.light, true)
     end

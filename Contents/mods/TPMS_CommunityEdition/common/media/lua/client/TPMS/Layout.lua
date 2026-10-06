@@ -14,8 +14,12 @@ end
 
 -- getTexture can hand back an empty placeholder or nil on failure.
 local function usableTexture(texture)
-    return type(texture) == "table" and type(texture.getWidthOrig) == "function"
-        and texture:getWidthOrig() > 0 and texture:getHeightOrig() > 0
+    if not texture then return false end
+    local ok, width, height = pcall(function()
+        return texture:getWidthOrig(), texture:getHeightOrig()
+    end)
+    return ok and type(width) == "number" and type(height) == "number"
+        and width > 0 and height > 0
 end
 
 local function resolveAnchor(dashboard, family, scale)
@@ -52,6 +56,7 @@ function Layout.update(dashboard, state)
     local bx, by = background:getX(), background:getY()
     local bw, bh = background:getWidth(), background:getHeight()
     if not state.layoutDirty and state.family == family and state.scale == scale
+        and state.textureStatus == state.status
         and state.bx == bx and state.by == by and state.bw == bw and state.bh == bh
         and state.background == background then return true end
 
@@ -60,7 +65,12 @@ function Layout.update(dashboard, state)
         x, y = resolveAnchor(dashboard, family, scale)
     end
     local light = state.light
-    local texture = realistic and state.textures.realistic or state.textures.icon
+    local texture = state.textures.icon
+    if state.status == "on" or state.status == "warn" then
+        texture = state.textures.yellow or texture
+    elseif state.status == "error" then
+        texture = state.textures.red or texture
+    end
     if not usableTexture(texture) then texture = state.textures.icon end
     if not usableTexture(texture) then return false end
     light.texture = texture
@@ -77,6 +87,7 @@ function Layout.update(dashboard, state)
         state.panel:setY(by + y - 4)
     end
     state.realistic, state.family, state.scale = realistic, family, scale
+    state.textureStatus = state.status
     state.bx, state.by, state.bw, state.bh = bx, by, bw, bh
     state.background, state.layoutDirty = background, false
     return true
