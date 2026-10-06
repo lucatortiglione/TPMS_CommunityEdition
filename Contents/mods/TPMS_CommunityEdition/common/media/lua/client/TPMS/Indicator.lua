@@ -72,7 +72,8 @@ function Indicator.ensure(dashboard)
     if not textures then
         textures = {
             icon = getTexture("media/ui/tpms.png"),
-            realistic = getTexture("media/ui/tpmsRD.png"),
+            yellow = getTexture("media/ui/icon_yellow.png"),
+            red = getTexture("media/ui/icon_red.png"),
             background = getTexture("media/ui/tpms_background.png"),
         }
     end
